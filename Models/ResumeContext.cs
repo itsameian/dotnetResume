@@ -7,7 +7,7 @@ namespace  dotnetResume.Models{
         public DbSet<Skill> Skills { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=.\;Database=dotnetResume;Trusted_Connection=True;MultipleActiveResultSets=true");
+            optionsBuilder.UseSqlServer(@"Data Source=Resume.db");
         }
     }
 }
