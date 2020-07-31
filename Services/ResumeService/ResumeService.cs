@@ -1,12 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using dotnetResume.Dtos.Resume;
 using dotnetResume.Models;
+using dotnetResume.Services;
 
 namespace dotnetResume.Services.ResumeService
 {
     public class ResumeService : IResumeService
     {
+        private List<Responsibility> Responsibilities = new List<Responsibility>();
         private List<Job> Jobs = new List<Job>{
             new Job{
                 Id = 1,
@@ -23,54 +28,89 @@ namespace dotnetResume.Services.ResumeService
                 EndDate = Convert.ToDateTime("04/27/2018")
             }
         };
-        public async Task<List<Job>> AddJob(Job newJob)
+        private readonly IMapper _mapper;
+        public ResumeService(IMapper mapper)
         {
-            throw new System.NotImplementedException();
+            this._mapper = mapper;
+
+        }
+        public async Task<ServiceResponse<List<GetJobDto>>> AddJob(AddJobDto newJob)
+        {
+            ServiceResponse<List<GetJobDto>> response = new ServiceResponse<List<GetJobDto>>();
+            Jobs.Add(_mapper.Map<Job>(newJob));
+            response.Data = Jobs.Select(j => _mapper.Map<GetJobDto>(j)).ToList();
+            return response;
         }
 
-        public async Task<List<Responsibility>> AddResponsibility(Responsibility newResponsibility)
+        public async Task<ServiceResponse<List<Responsibility>>> AddResponsibility(Responsibility newResponsibility)
         {
-            throw new NotImplementedException();
+            ServiceResponse<List<Responsibility>> response = new ServiceResponse<List<Responsibility>>();
+            Responsibilities.Add(newResponsibility);
+            response.Data = Responsibilities;
+            return response;
         }
 
-        public async Task<List<Job>> DeleteJob(int id)
+        public async Task<ServiceResponse<List<Job>>> DeleteJob(int id)
         {
-            throw new NotImplementedException();
+            ServiceResponse<List<Job>> response = new ServiceResponse<List<Job>>();
+            Job job = Jobs.FirstOrDefault(j => j.Id == id);
+            Jobs.Remove(job);
+            response.Data = Jobs;
+            return response;
         }
 
-        public async Task<Responsibility> DeleteResponsibilty(int id)
+        public async Task<ServiceResponse<List<Responsibility>>> DeleteResponsibilty(int id)
         {
-            throw new NotImplementedException();
+            ServiceResponse<List<Responsibility>> response = new ServiceResponse<List<Responsibility>>();
+            Responsibility responsibility = Responsibilities.FirstOrDefault(r => r.Id == id);
+            Responsibilities.Remove(responsibility);
+            response.Data = Responsibilities;
+            return response;
         }
 
-        public async Task<List<Job>> GetAllJobs()
+        public async Task<ServiceResponse<List<GetJobDto>>> GetAllJobs()
         {
-            throw new System.NotImplementedException();
+            ServiceResponse<List<GetJobDto>> response = new ServiceResponse<List<GetJobDto>>();
+            response.Data = (Jobs.Select(j => _mapper.Map<GetJobDto>(j))).ToList();
+            return response;
         }
 
-        public async Task<Job> GetJobById(int id)
+        public async Task<ServiceResponse<GetJobDto>> GetJobById(int id)
         {
-            throw new System.NotImplementedException();
+            ServiceResponse<GetJobDto> response = new ServiceResponse<GetJobDto>();
+            response.Data = _mapper.Map<GetJobDto>(Jobs.First(j => j.Id == id));
+            return response;
         }
 
-        public async Task<List<Responsibility>> GetJobResponsibilities(int jobId)
+        public async Task<ServiceResponse<List<Responsibility>>> GetJobResponsibilities(int jobId)
         {
-            throw new NotImplementedException();
+            ServiceResponse<List<Responsibility>> response = new ServiceResponse<List<Responsibility>>();
+            response.Data = Responsibilities;
+            return response;
         }
 
-        public  async Task<Responsibility> GetResponsibilityById(int id)
+        public async Task<ServiceResponse<Responsibility>> GetResponsibilityById(int id)
         {
-            throw new NotImplementedException();
+            ServiceResponse<Responsibility> response = new ServiceResponse<Responsibility>();
+            Responsibility responsibility = Responsibilities.FirstOrDefault(r => r.Id == id);
+            response.Data = responsibility;
+            return response;
         }
 
-        public async Task<Job> UpdateJob(Job updatedJob)
+        public async Task<ServiceResponse<Job>> UpdateJob(Job updatedJob)
         {
-            throw new NotImplementedException();
+            ServiceResponse<Job> response = new ServiceResponse<Job>();
+            response.Success = false;
+            response.Message = "Method not yet implemented.";
+            return response;
         }
 
-        public async Task<Responsibility> UpdateResponsibility(Responsibility updatedResponsibility)
+        public async Task<ServiceResponse<Responsibility>> UpdateResponsibility(Responsibility updatedResponsibility)
         {
-            throw new NotImplementedException();
+            ServiceResponse<Responsibility> response = new ServiceResponse<Responsibility>();
+            response.Success = false;
+            response.Message = "Method not yet implemented.";
+            return response;
         }
     }
 }

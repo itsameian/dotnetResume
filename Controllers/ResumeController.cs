@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using dotnetResume.Dtos.Resume;
 using dotnetResume.Models;
 using dotnetResume.Services.ResumeService;
 using Microsoft.AspNetCore.Mvc;
@@ -15,25 +17,44 @@ namespace dotnetResume.Controllers
         public ResumeController(IResumeService resumeService)
         {
             this._resumeService = resumeService;
-
         }
 
-        [HttpGet("AllJobs")]
-        public IActionResult GetJobs()
+        [HttpGet("Job/All")]
+        public async Task<IActionResult> GetAllJobs()
         {
-            return Ok(_resumeService.GetAllJobs());
+            return Ok(await _resumeService.GetAllJobs());
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetJob(int id)
+        [HttpGet("Responsibility/All/{jobId}")]
+        public async Task<IActionResult> GetAllResponsibilities(int jobId)
         {
-            return Ok(_resumeService.GetJobById(id));
+            return Ok(await _resumeService.GetJobResponsibilities(jobId));
         }
 
-        [HttpPost]
-        public IActionResult PostJob(Job newJob)
+        [HttpGet("Job/{id}")]
+        public async Task<IActionResult> GetSingleJob(int id)
         {
-            return Ok(_resumeService.AddJob(newJob));
+            
+            return Ok(await _resumeService.GetJobById(id));
         }
+
+        [HttpGet("Responsibility/{id}")]
+        public async Task<IActionResult> GetSingleResponsibility(int id)
+        {
+            return Ok(await _resumeService.GetResponsibilityById(id));
+        }
+
+        [HttpPost("Job")]
+        public async Task<IActionResult> PostJob(AddJobDto newJob)
+        {
+            return Ok(await _resumeService.AddJob(newJob));
+        }
+
+        [HttpPost("Responsibility")]
+        public async Task<IActionResult> PostResponsibility(Responsibility responsibility)
+        {
+            return Ok(await _resumeService.AddResponsibility(responsibility));
+        }
+        
     }
 }

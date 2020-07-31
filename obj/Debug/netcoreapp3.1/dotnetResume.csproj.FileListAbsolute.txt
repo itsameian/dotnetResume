@@ -18,3 +18,6 @@ C:\Users\User\Desktop\Projects\dotnetResume\obj\Debug\netcoreapp3.1\staticwebass
 C:\Users\User\Desktop\Projects\dotnetResume\obj\Debug\netcoreapp3.1\dotnetResume.dll
 C:\Users\User\Desktop\Projects\dotnetResume\obj\Debug\netcoreapp3.1\dotnetResume.pdb
 C:\Users\User\Desktop\Projects\dotnetResume\obj\Debug\netcoreapp3.1\dotnetResume.genruntimeconfig.cache
+C:\Users\User\Desktop\Projects\dotnetResume\bin\Debug\netcoreapp3.1\AutoMapper.dll
+C:\Users\User\Desktop\Projects\dotnetResume\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\User\Desktop\Projects\dotnetResume\obj\Debug\netcoreapp3.1\dotnetResume.csproj.CopyComplete

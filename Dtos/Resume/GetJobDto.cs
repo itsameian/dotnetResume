@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using dotnetResume.Models;
 
-namespace dotnetResume.Models
+namespace dotnetResume.Dtos.Resume
 {
-    public class Job
+    public class GetJobDto
     {
         public int Id { get; set; }
         public string Title { get; set; }
