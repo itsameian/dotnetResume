@@ -56,7 +56,6 @@ C:\Users\User\Desktop\Projects\dotnetResume\bin\Debug\netcoreapp3.1\runtimes\win
 C:\Users\User\Desktop\Projects\dotnetResume\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\User\Desktop\Projects\dotnetResume\API\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\User\Desktop\Projects\dotnetResume\API\bin\Debug\netcoreapp3.1\appsettings.json
-C:\Users\User\Desktop\Projects\dotnetResume\API\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 C:\Users\User\Desktop\Projects\dotnetResume\API\bin\Debug\netcoreapp3.1\dotnetResume.exe
 C:\Users\User\Desktop\Projects\dotnetResume\API\bin\Debug\netcoreapp3.1\dotnetResume.deps.json
 C:\Users\User\Desktop\Projects\dotnetResume\API\bin\Debug\netcoreapp3.1\dotnetResume.runtimeconfig.json
@@ -110,3 +109,4 @@ C:\Users\User\Desktop\Projects\dotnetResume\API\obj\Debug\netcoreapp3.1\staticwe
 C:\Users\User\Desktop\Projects\dotnetResume\API\obj\Debug\netcoreapp3.1\dotnetResume.dll
 C:\Users\User\Desktop\Projects\dotnetResume\API\obj\Debug\netcoreapp3.1\dotnetResume.pdb
 C:\Users\User\Desktop\Projects\dotnetResume\API\obj\Debug\netcoreapp3.1\dotnetResume.genruntimeconfig.cache
+C:\Users\User\Desktop\Projects\dotnetResume\API\bin\Debug\netcoreapp3.1\Services\ResumeService\Properties\launchSettings.json

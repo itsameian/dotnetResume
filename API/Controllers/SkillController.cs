@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [ApiController]
+    [Route("api/resume/[controller]")]
     public class SkillController : ControllerBase
     {
         private readonly ISkillService _skillService;
@@ -15,13 +17,13 @@ namespace API.Controllers
             this._skillService = skillService;
         }
 
-        [HttpGet("Resume/Skill/All")]
+        [HttpGet("All")]
         public async Task<IActionResult> GetAllSkills()
         {
             return Ok(await _skillService.GetAllSkills());
         }
 
-        [HttpGet("Resume/Skill/{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetSkillById(int id)
         {
             ServiceResponse<GetSkillDto> response = await _skillService.GetSkillById(id);
@@ -32,7 +34,7 @@ namespace API.Controllers
             return Ok(response);
         }
 
-        [HttpPost("Resume/Skill")]
+        [HttpPost]
         public async Task<IActionResult> PostSkill(AddSkillDto newSkill)
         {
             ServiceResponse<GetSkillDto> response = await _skillService.AddSkill(newSkill);
@@ -43,7 +45,7 @@ namespace API.Controllers
             return Ok(response);
         }
 
-        [HttpDelete("Resume/Skill")]
+        [HttpDelete]
         public async Task<IActionResult> DeleteSkill(int id)
         {
             ServiceResponse<List<GetSkillDto>> response = await _skillService.DeleteSkill(id);

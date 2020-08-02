@@ -57,7 +57,12 @@ namespace dotnetResume.Controllers
         [HttpGet("Responsibility/{id}")]
         public async Task<IActionResult> GetSingleResponsibility(int id)
         {
-            return Ok(await _resumeService.GetResponsibilityById(id));
+            ServiceResponse<GetResponsibilityDto> response = await _resumeService.GetResponsibilityById(id);
+            if (response.Data == null)
+            {
+                return NotFound(response);
+            }
+            return Ok(response);
         }
 
         [HttpPost("Job")]
