@@ -64,8 +64,8 @@ namespace dotnetResume.Services.ResumeService
             try
             {
                 Job job = Jobs.FirstOrDefault(j => j.Id == id);
-                Jobs.Remove(job);
-                response.Data = Jobs.Select(j => _mapper.Map<GetJobDto>(j)).ToList();
+                _context.Jobs.Remove(job);
+                response.Data = await _context.Jobs.Select(j => _mapper.Map<GetJobDto>(j)).ToListAsync();
             }
             catch (Exception ex)
             {
@@ -87,15 +87,14 @@ namespace dotnetResume.Services.ResumeService
         public async Task<ServiceResponse<List<GetJobDto>>> GetAllJobs()
         {
             ServiceResponse<List<GetJobDto>> response = new ServiceResponse<List<GetJobDto>>();
-            List<Job> Jobs = await _context.Jobs.ToListAsync();
-            response.Data = (Jobs.Select(j => _mapper.Map<GetJobDto>(j))).ToList();
+            response.Data = await _context.Jobs.Select(j => _mapper.Map<GetJobDto>(j)).ToListAsync();
             return response;
         }
 
         public async Task<ServiceResponse<GetJobDto>> GetJobById(int id)
         {
             ServiceResponse<GetJobDto> response = new ServiceResponse<GetJobDto>();
-            response.Data = _mapper.Map<GetJobDto>(Jobs.First(j => j.Id == id));
+            response.Data = _mapper.Map<GetJobDto>(await _context.Jobs.FirstOrDefaultAsync(j => j.Id == id));
             return response;
         }
 
@@ -119,7 +118,7 @@ namespace dotnetResume.Services.ResumeService
             ServiceResponse<GetJobDto> response = new ServiceResponse<GetJobDto>();
             try
             {
-                Job job = Jobs.FirstOrDefault(j => j.Id == updatedJob.Id);
+                Job job = await _context.Jobs.FirstOrDefaultAsync(j => j.Id == updatedJob.Id);
                 job.Company = updatedJob.Company;
                 job.Title = updatedJob.Title;
                 job.StartDate = updatedJob.StartDate;

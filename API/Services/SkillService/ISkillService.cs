@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using API.Dtos.Resume;
 using dotnetResume.Models;
 using dotnetResume.Services;
 
@@ -7,10 +8,10 @@ namespace API.Services.SkillService
 {
     public interface ISkillService
     {
-         Task<ServiceResponse<Skill>> AddSkill(Skill skill);
-         Task<ServiceResponse<Skill>> GetSkillById(int id);
-         Task<ServiceResponse<List<Skill>>> GetAllSkills();
-         Task<ServiceResponse<List<Skill>>> DeleteSkill(int id);
-         Task<ServiceResponse<Skill>> UpdateSkill(Skill skill);
+        Task<ServiceResponse<GetSkillDto>> AddSkill(AddSkillDto addedSkill);
+        Task<ServiceResponse<GetSkillDto>> GetSkillById(int id);
+        Task<ServiceResponse<List<GetSkillDto>>> GetAllSkills();
+        Task<ServiceResponse<List<GetSkillDto>>> DeleteSkill(int id);
+        Task<ServiceResponse<GetSkillDto>> UpdateSkill(UpdateSkillDto skill);
     }
 }

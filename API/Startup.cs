@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Services.SkillService;
 using AutoMapper;
 using dotnetResume.Data;
 using dotnetResume.Services.ResumeService;
@@ -33,6 +34,7 @@ namespace dotnetResume
             services.AddControllers();
             services.AddAutoMapper(typeof(Startup));
             services.AddScoped<IResumeService, ResumeService>();
+            services.AddScoped<ISkillService, SkillService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

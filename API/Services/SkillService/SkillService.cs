@@ -1,9 +1,13 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using API.Dtos.Resume;
 using AutoMapper;
 using dotnetResume.Data;
 using dotnetResume.Models;
 using dotnetResume.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Services.SkillService
 {
@@ -17,29 +21,60 @@ namespace API.Services.SkillService
             this._context = context;
 
         }
-        public Task<ServiceResponse<Skill>> AddSkill(Skill skill)
+        public async Task<ServiceResponse<GetSkillDto>> AddSkill(AddSkillDto addedSkill)
         {
-            ServiceResponse<Skill> response = new ServiceResponse<Skill>();
+            ServiceResponse<GetSkillDto> response = new ServiceResponse<GetSkillDto>();
+            Skill skill = _mapper.Map<Skill>(addedSkill);
+            try{
+                await _context.AddAsync(skill);
+                await _context.SaveChangesAsync();
+                response.Data = _mapper.Map<GetSkillDto>(skill);
+            }
+            catch(Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+            return response;
         }
 
-        public Task<ServiceResponse<List<Skill>>> DeleteSkill(int id)
+        public async Task<ServiceResponse<List<GetSkillDto>>> DeleteSkill(int id)
         {
-            throw new System.NotImplementedException();
+            ServiceResponse<List<GetSkillDto>> response = new ServiceResponse<List<GetSkillDto>>();
+            try
+            {
+                Skill skill = await _context.Skills.FirstOrDefaultAsync(s => s.Id == id);
+                _context.Skills.Remove(skill);
+                await _context.SaveChangesAsync();
+                response.Data = await _context.Skills.Select(s => _mapper.Map<GetSkillDto>(s)).ToListAsync();
+            }
+            catch(Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
+            return response;
         }
 
-        public Task<ServiceResponse<List<Skill>>> GetAllSkills()
+        public async Task<ServiceResponse<List<GetSkillDto>>> GetAllSkills()
         {
-            throw new System.NotImplementedException();
+            ServiceResponse<List<GetSkillDto>> response = new ServiceResponse<List<GetSkillDto>>();
+            response.Data = await _context.Skills.Select(s => _mapper.Map<GetSkillDto>(s)).ToListAsync();
+            return response;
         }
 
-        public Task<ServiceResponse<Skill>> GetSkillById(int id)
+        public async Task<ServiceResponse<GetSkillDto>> GetSkillById(int id)
         {
-            throw new System.NotImplementedException();
+            ServiceResponse<GetSkillDto> response = new ServiceResponse<GetSkillDto>();
+            Skill skill = await _context.Skills.FirstOrDefaultAsync(s => s.Id == id);
+            response.Data = _mapper.Map<GetSkillDto>(skill);
+            return response;
         }
 
-        public Task<ServiceResponse<Skill>> UpdateSkill(Skill skill)
+        public async Task<ServiceResponse<GetSkillDto>> UpdateSkill(UpdateSkillDto skill)
         {
-            throw new System.NotImplementedException();
+            ServiceResponse<GetSkillDto> response = new ServiceResponse<GetSkillDto>();
+            return response;
         }
     }
 }
