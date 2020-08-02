@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using dotnetResume.Models;
+using API.Models;
 
-namespace dotnetResume.Dtos.Resume
+namespace API.Dtos.Resume
 {
     public class GetJobDto
     {

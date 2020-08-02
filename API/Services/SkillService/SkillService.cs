@@ -4,9 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Dtos.Resume;
 using AutoMapper;
-using dotnetResume.Data;
-using dotnetResume.Models;
-using dotnetResume.Services;
+using API.Data;
+using API.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Services.SkillService
@@ -21,10 +20,10 @@ namespace API.Services.SkillService
             this._context = context;
 
         }
-        public async Task<ServiceResponse<GetSkillDto>> AddSkill(AddSkillDto addedSkill)
+        public async Task<ServiceResponse<GetSkillDto>> AddSkill(AddSkillDto newSkill)
         {
             ServiceResponse<GetSkillDto> response = new ServiceResponse<GetSkillDto>();
-            Skill skill = _mapper.Map<Skill>(addedSkill);
+            Skill skill = _mapper.Map<Skill>(newSkill);
             try{
                 await _context.AddAsync(skill);
                 await _context.SaveChangesAsync();

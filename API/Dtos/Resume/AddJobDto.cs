@@ -1,6 +1,6 @@
 using System;
 
-namespace dotnetResume.Dtos.Resume
+namespace API.Dtos.Resume
 {
     public class AddJobDto
     {

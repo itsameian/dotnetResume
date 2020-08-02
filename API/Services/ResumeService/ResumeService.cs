@@ -3,33 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using dotnetResume.Data;
-using dotnetResume.Dtos.Resume;
-using dotnetResume.Models;
-using dotnetResume.Services;
+using API.Data;
+using API.Dtos.Resume;
+using API.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace dotnetResume.Services.ResumeService
+namespace API.Services.ResumeService
 {
     public class ResumeService : IResumeService
     {
-        private List<Responsibility> Responsibilities = new List<Responsibility>();
-        private List<Job> Jobs = new List<Job>{
-            new Job{
-                Id = 1,
-                Title = "Big Data Engineer",
-                Company = "Allstate",
-                StartDate = Convert.ToDateTime("04/27/2018"),
-                EndDate = Convert.ToDateTime("07/03/2020")
-            },
-            new Job{
-                Id = 2,
-                Title = "Full Stack Engineer",
-                Company = "Allstate",
-                StartDate = Convert.ToDateTime("12/27/2015"),
-                EndDate = Convert.ToDateTime("04/27/2018")
-            }
-        };
         private readonly IMapper _mapper;
         private readonly DataContext _context;
         public ResumeService(IMapper mapper, DataContext context)
@@ -41,20 +23,36 @@ namespace dotnetResume.Services.ResumeService
         public async Task<ServiceResponse<List<GetJobDto>>> AddJob(AddJobDto newJob)
         {
             ServiceResponse<List<GetJobDto>> response = new ServiceResponse<List<GetJobDto>>();
-            Job job = _mapper.Map<Job>(newJob);
-            await _context.Jobs.AddAsync(job);
-            await _context.SaveChangesAsync();
-            response.Data = _context.Jobs.Select(j => _mapper.Map<GetJobDto>(j)).ToList();
+            try
+            {
+                Job job = _mapper.Map<Job>(newJob);
+                await _context.Jobs.AddAsync(job);
+                await _context.SaveChangesAsync();
+                response.Data = _context.Jobs.Select(j => _mapper.Map<GetJobDto>(j)).ToList();
+            }
+            catch(Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
             return response;
         }
 
-        public async Task<ServiceResponse<List<Responsibility>>> AddResponsibility(Responsibility newResponsibility)
+        public async Task<ServiceResponse<List<GetResponsibilityDto>>> AddResponsibility(AddResponsibilityDto newResponsibility)
         {
-            ServiceResponse<List<Responsibility>> response = new ServiceResponse<List<Responsibility>>();
-            Responsibility responsibility = _mapper.Map<Responsibility>(newResponsibility);
-            await _context.Responsibilities.AddAsync(newResponsibility);
-            await _context.SaveChangesAsync();
-            response.Data = Responsibilities;
+            ServiceResponse<List<GetResponsibilityDto>> response = new ServiceResponse<List<GetResponsibilityDto>>();
+            try
+            {
+                Responsibility responsibility = _mapper.Map<Responsibility>(newResponsibility);
+                await _context.Responsibilities.AddAsync(responsibility);
+                await _context.SaveChangesAsync();
+                response.Data = await _context.Responsibilities.Select(r => _mapper.Map<GetResponsibilityDto>(r)).ToListAsync();
+            }
+            catch(Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
             return response;
         }
 
@@ -63,8 +61,9 @@ namespace dotnetResume.Services.ResumeService
             ServiceResponse<List<GetJobDto>> response = new ServiceResponse<List<GetJobDto>>();
             try
             {
-                Job job = Jobs.FirstOrDefault(j => j.Id == id);
+                Job job = await _context.Jobs.FirstOrDefaultAsync(j => j.Id == id);
                 _context.Jobs.Remove(job);
+                await _context.SaveChangesAsync();
                 response.Data = await _context.Jobs.Select(j => _mapper.Map<GetJobDto>(j)).ToListAsync();
             }
             catch (Exception ex)
@@ -75,12 +74,21 @@ namespace dotnetResume.Services.ResumeService
             return response;
         }
 
-        public async Task<ServiceResponse<List<Responsibility>>> DeleteResponsibilty(int id)
+        public async Task<ServiceResponse<List<GetResponsibilityDto>>> DeleteResponsibilty(int id)
         {
-            ServiceResponse<List<Responsibility>> response = new ServiceResponse<List<Responsibility>>();
-            Responsibility responsibility = Responsibilities.FirstOrDefault(r => r.Id == id);
-            Responsibilities.Remove(responsibility);
-            response.Data = Responsibilities;
+            ServiceResponse<List<GetResponsibilityDto>> response = new ServiceResponse<List<GetResponsibilityDto>>();
+            try
+            {
+                Responsibility responsibility = await _context.Responsibilities.FirstOrDefaultAsync(r => r.Id == id);
+                _context.Responsibilities.Remove(responsibility);
+                await _context.SaveChangesAsync();
+                response.Data = await _context.Responsibilities.Select(r => _mapper.Map<GetResponsibilityDto>(r)).ToListAsync();
+            }
+            catch(Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
             return response;
         }
 
@@ -94,22 +102,41 @@ namespace dotnetResume.Services.ResumeService
         public async Task<ServiceResponse<GetJobDto>> GetJobById(int id)
         {
             ServiceResponse<GetJobDto> response = new ServiceResponse<GetJobDto>();
-            response.Data = _mapper.Map<GetJobDto>(await _context.Jobs.FirstOrDefaultAsync(j => j.Id == id));
+            try
+            {
+                Job job = await _context.Jobs.FirstOrDefaultAsync(j => j.Id == id);
+                await _context.Jobs.AddAsync(job);
+                await _context.SaveChangesAsync();
+                response.Data = _mapper.Map<GetJobDto>(job);
+            }
+            catch(Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
             return response;
         }
 
-        public async Task<ServiceResponse<List<Responsibility>>> GetJobResponsibilities(int jobId)
+        public async Task<ServiceResponse<List<GetResponsibilityDto>>> GetJobResponsibilities(int jobId)
         {
-            ServiceResponse<List<Responsibility>> response = new ServiceResponse<List<Responsibility>>();
-            response.Data = Responsibilities;
+            ServiceResponse<List<GetResponsibilityDto>> response = new ServiceResponse<List<GetResponsibilityDto>>();
+            response.Data = await _context.Responsibilities.Select(r => _mapper.Map<GetResponsibilityDto>(r)).ToListAsync();
             return response;
         }
 
-        public async Task<ServiceResponse<Responsibility>> GetResponsibilityById(int id)
+        public async Task<ServiceResponse<GetResponsibilityDto>> GetResponsibilityById(int id)
         {
-            ServiceResponse<Responsibility> response = new ServiceResponse<Responsibility>();
-            Responsibility responsibility = Responsibilities.FirstOrDefault(r => r.Id == id);
-            response.Data = responsibility;
+            ServiceResponse<GetResponsibilityDto> response = new ServiceResponse<GetResponsibilityDto>();
+            try
+            {
+                Responsibility responsibility = await _context.Responsibilities.FirstOrDefaultAsync(r => r.Id == id);
+                response.Data = _mapper.Map<GetResponsibilityDto>(responsibility);
+            }
+            catch(Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message;
+            }
             return response;
         }
 
@@ -134,9 +161,9 @@ namespace dotnetResume.Services.ResumeService
             return response;
         }
 
-        public async Task<ServiceResponse<Responsibility>> UpdateResponsibility(Responsibility updatedResponsibility)
+        public async Task<ServiceResponse<GetResponsibilityDto>> UpdateResponsibility(UpdateResponsibilityDto updatedResponsibility)
         {
-            ServiceResponse<Responsibility> response = new ServiceResponse<Responsibility>();
+            ServiceResponse<GetResponsibilityDto> response = new ServiceResponse<GetResponsibilityDto>();
             response.Success = false;
             response.Message = "Method not yet implemented.";
             return response;

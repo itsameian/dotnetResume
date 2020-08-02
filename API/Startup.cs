@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Services.SkillService;
 using AutoMapper;
-using dotnetResume.Data;
-using dotnetResume.Services.ResumeService;
+using API.Data;
+using API.Services.ResumeService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -16,7 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace dotnetResume
+namespace API
 {
     public class Startup
     {

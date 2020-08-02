@@ -1,7 +1,7 @@
-using dotnetResume.Models;
+using API.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace dotnetResume.Data
+namespace API.Data
 {
     public class DataContext : DbContext
     {

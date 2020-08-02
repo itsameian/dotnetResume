@@ -1,4 +1,4 @@
-namespace dotnetResume.Models
+namespace API.Models
 {
     public class Responsibility
     {

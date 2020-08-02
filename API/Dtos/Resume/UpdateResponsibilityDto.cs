@@ -1,4 +1,4 @@
-using dotnetResume.Models;
+using API.Models;
 
 namespace API.Dtos.Resume
 {

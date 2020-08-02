@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using dotnetResume.Dtos.Resume;
-using dotnetResume.Models;
-using dotnetResume.Services;
-using dotnetResume.Services.ResumeService;
+using API.Dtos.Resume;
+using API.Models;
+using API.Services;
+using API.Services.ResumeService;
 using Microsoft.AspNetCore.Mvc;
 
 namespace dotnetResume.Controllers
@@ -67,7 +67,7 @@ namespace dotnetResume.Controllers
         }
 
         [HttpPost("Responsibility")]
-        public async Task<IActionResult> PostResponsibility(Responsibility responsibility)
+        public async Task<IActionResult> PostResponsibility(AddResponsibilityDto responsibility)
         {
             return Ok(await _resumeService.AddResponsibility(responsibility));
         }

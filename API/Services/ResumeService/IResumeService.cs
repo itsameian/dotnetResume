@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using dotnetResume.Dtos.Resume;
-using dotnetResume.Models;
+using API.Dtos.Resume;
 
-namespace dotnetResume.Services.ResumeService
+namespace API.Services.ResumeService
 {
     public interface IResumeService
     {
@@ -12,11 +11,11 @@ namespace dotnetResume.Services.ResumeService
          Task<ServiceResponse<List<GetJobDto>>> AddJob(AddJobDto newJob);
          Task<ServiceResponse<GetJobDto>> UpdateJob(UpdateJobDto updatedJob);
          Task<ServiceResponse<List<GetJobDto>>> DeleteJob(int id);
-         Task<ServiceResponse<List<Responsibility>>> GetJobResponsibilities(int jobId);
-         Task<ServiceResponse<Responsibility>> GetResponsibilityById(int id);
-         Task<ServiceResponse<List<Responsibility>>> AddResponsibility(Responsibility newResponsibility);
-         Task<ServiceResponse<Responsibility>> UpdateResponsibility(Responsibility updatedResponsibility);
-         Task<ServiceResponse<List<Responsibility>>> DeleteResponsibilty(int id);
+         Task<ServiceResponse<List<GetResponsibilityDto>>> GetJobResponsibilities(int jobId);
+         Task<ServiceResponse<GetResponsibilityDto>> GetResponsibilityById(int id);
+         Task<ServiceResponse<List<GetResponsibilityDto>>> AddResponsibility(AddResponsibilityDto newResponsibility);
+         Task<ServiceResponse<GetResponsibilityDto>> UpdateResponsibility(UpdateResponsibilityDto updatedResponsibility);
+         Task<ServiceResponse<List<GetResponsibilityDto>>> DeleteResponsibilty(int id);
 
     }
 }

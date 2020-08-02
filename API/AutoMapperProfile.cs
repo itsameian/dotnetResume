@@ -1,15 +1,17 @@
+using API.Dtos.Resume;
 using AutoMapper;
-using dotnetResume.Dtos.Resume;
-using dotnetResume.Models;
+using API.Models;
 
-namespace dotnetResume
+namespace API
 {
     public class AutoMapperProfile : Profile
     {
         public AutoMapperProfile()
         {
             CreateMap<Job, GetJobDto>();
-            CreateMap<AddJobDto, Job>();            
+            CreateMap<AddJobDto, Job>();   
+            CreateMap<Skill, GetSkillDto>();
+            CreateMap<AddSkillDto, Skill>();         
         }
     }
 }

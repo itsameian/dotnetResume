@@ -1,4 +1,4 @@
-namespace dotnetResume.Services
+namespace API.Services
 {
     public class ServiceResponse<T>
     {

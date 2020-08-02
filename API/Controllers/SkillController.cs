@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.Dtos.Resume;
 using API.Services.SkillService;
-using dotnetResume.Services;
+using API.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -33,9 +33,9 @@ namespace API.Controllers
         }
 
         [HttpPost("Resume/Skill")]
-        public async Task<IActionResult> PostSkill(AddSkillDto addedSkill)
+        public async Task<IActionResult> PostSkill(AddSkillDto newSkill)
         {
-            ServiceResponse<GetSkillDto> response = await _skillService.AddSkill(addedSkill);
+            ServiceResponse<GetSkillDto> response = await _skillService.AddSkill(newSkill);
             if (!response.Success)
             {
                 return BadRequest(response);
