@@ -1,8 +1,8 @@
-import React from 'react';
-import classes from './App.module.css';
-import Head from '../Head/Head';
-import Body from '../Body/Body';
-import Foot from '../Foot/Foot';
+import React from "react";
+import classes from "./App.module.css";
+import Head from "../../components/Head/Head";
+import Body from "../Body/Body";
+import Foot from "../Foot/Foot";
 
 function App() {
   return (

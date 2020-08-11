@@ -1,0 +1,36 @@
+.Nav {
+  background-color: black;
+  list-style-type: none;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 98%;
+  padding: 0px 20px;
+}
+
+.Right {
+  float: right;
+  padding: 15px 20px;
+  cursor: pointer;
+}
+
+.Right:hover {
+  background-color: #333;
+}
+
+.NavLink {
+  color: white;
+  display: block;
+  text-decoration: none;
+}
+
+.Brand {
+  color: white;
+  display: block;
+  text-transform: capitalize;
+}
+
+.Left {
+  float: left;
+  padding: 15px 0px;
+}
