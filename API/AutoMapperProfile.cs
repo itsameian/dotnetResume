@@ -10,6 +10,7 @@ namespace API
         {
             CreateMap<Job, GetJobDto>();
             CreateMap<AddJobDto, Job>();   
+            CreateMap<Responsibility, GetResponsibilityDto>();
             CreateMap<Skill, GetSkillDto>();
             CreateMap<AddSkillDto, Skill>();         
         }

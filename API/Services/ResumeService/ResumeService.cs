@@ -95,7 +95,11 @@ namespace API.Services.ResumeService
         public async Task<ServiceResponse<List<GetJobDto>>> GetAllJobs()
         {
             ServiceResponse<List<GetJobDto>> response = new ServiceResponse<List<GetJobDto>>();
-            response.Data = await _context.Jobs.Select(j => _mapper.Map<GetJobDto>(j)).ToListAsync();
+            response.Data = await _context
+                .Jobs
+                .Include(job => job.Responsibilities)
+                .Select(j => _mapper.Map<GetJobDto>(j))
+                .ToListAsync();
             return response;
         }
 
@@ -104,9 +108,10 @@ namespace API.Services.ResumeService
             ServiceResponse<GetJobDto> response = new ServiceResponse<GetJobDto>();
             try
             {
-                Job job = await _context.Jobs.FirstOrDefaultAsync(j => j.Id == id);
-                await _context.Jobs.AddAsync(job);
-                await _context.SaveChangesAsync();
+                Job job = await _context
+                    .Jobs
+                    .Include(job => job.Responsibilities)
+                    .FirstOrDefaultAsync(j => j.Id == id);
                 response.Data = _mapper.Map<GetJobDto>(job);
             }
             catch(Exception ex)
