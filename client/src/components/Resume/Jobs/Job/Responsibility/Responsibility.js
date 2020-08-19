@@ -3,7 +3,7 @@ import React from 'react';
 const JobResponsibility = props => {
     return (
         <div>
-            <p>{props.Responsibility}</p>
+            <p>{props.responsibility.description}</p>
         </div>
     )
 };

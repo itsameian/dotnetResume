@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./App.module.css";
-import Head from "../../components/Head/Head";
+import Head from "../Head/Head";
 import Body from "../Body/Body";
 import Foot from "../Foot/Foot";
 

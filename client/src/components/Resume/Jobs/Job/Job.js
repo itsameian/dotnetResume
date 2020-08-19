@@ -1,17 +1,27 @@
 import React from 'react';
-import JobResponsibilities from './JobResponsibility/JobResponsibility';
+
+import Responsibility from './Responsibility/Responsibility';
 
 const Job = props => {
-  const responsibilityList = props.job.responsibilities.map((r) => {
+  const responsibilities = props.job.responsibilities;
+  console.log("[Job.js] Responsibilities:", responsibilities)
+  const responsibilityList = responsibilities.map((r) => {
     return (
-      <JobResponsibility responsibility = {r}></JobResponsibility>
+      <li key={r.id}>
+        <Responsibility responsibility={r} />
+      </li>
     )
   });
   return (
     <div>
-      <p>{props.job}</p>
+      <hr />
+      <p>
+        <span>{props.job.title}</span> <em><span>{props.job.company}</span></em>
+      </p>
       <p>{props.job.startDate} - {props.job.endDate}</p>
-      {responsibilityList}
+      <ul>
+        {responsibilityList}
+      </ul>
     </div>
   )
 };
