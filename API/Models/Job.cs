@@ -10,5 +10,6 @@ namespace API.Models
         public string Company { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public ICollection<Responsibility> Responsibilities {get;}
     }
 }

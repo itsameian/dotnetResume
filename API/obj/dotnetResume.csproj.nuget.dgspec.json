@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Desktop\\Projects\\dotnetResume\\API\\dotnetResume.csproj": {}
+    "D:\\Projects\\dotnetResume\\API\\dotnetResume.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Desktop\\Projects\\dotnetResume\\API\\dotnetResume.csproj": {
+    "D:\\Projects\\dotnetResume\\API\\dotnetResume.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Desktop\\Projects\\dotnetResume\\API\\dotnetResume.csproj",
+        "projectUniqueName": "D:\\Projects\\dotnetResume\\API\\dotnetResume.csproj",
         "projectName": "dotnetResume",
-        "projectPath": "C:\\Users\\User\\Desktop\\Projects\\dotnetResume\\API\\dotnetResume.csproj",
+        "projectPath": "D:\\Projects\\dotnetResume\\API\\dotnetResume.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Desktop\\Projects\\dotnetResume\\API\\obj\\",
+        "outputPath": "D:\\Projects\\dotnetResume\\API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config"
