@@ -7,6 +7,7 @@ import classes from './Resume.module.css';
 const Resume = props => {
     return (
         <div className={classes.Resume}>
+            <h2>RESUME</h2>
             <Jobs jobs={props.jobs}></Jobs>
         </div>
     )
